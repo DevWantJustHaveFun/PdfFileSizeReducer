@@ -1,36 +1,34 @@
 buildscript {
-	ext {
-		springBootVersion = '1.5.10.RELEASE'
-	}
 	repositories {
 		mavenCentral()
-	}
-	dependencies {
-		classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
 	}
 }
 
 apply plugin: 'java'
 apply plugin: 'eclipse'
-apply plugin: 'org.springframework.boot'
 
 group = 'com.example'
 version = '0.0.1-SNAPSHOT'
 sourceCompatibility = 1.8
 
 repositories {
+	mavenLocal()
 	mavenCentral()
 }
 
 
 dependencies {
-	compile('org.springframework.boot:spring-boot-starter')
-
+   
+    // logging
+   	compile group: 'ch.qos.logback', name: 'logback-classic', version: '1.2.3'
+   	
 	// needed for pdf manipulation
 	compile('com.itextpdf:itextpdf:5.5.13')
+	// needed for jpeg ymck conversion
 	compile('com.twelvemonkeys.imageio:imageio-jpeg:3.3.2')
 	compile('org.apache.sanselan:sanselan:0.97-incubator')
+	
+	// test
+	testCompile group: 'junit', name: 'junit', version: '4.12'
 
-	compileOnly('org.projectlombok:lombok')
-	testCompile('org.springframework.boot:spring-boot-starter-test')
 }
